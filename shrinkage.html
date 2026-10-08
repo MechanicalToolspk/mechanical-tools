@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shrinkage Calculator</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px 15px;
+        font-family: Arial, sans-serif;
+        background: #f2f4f7;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    label {
+        display: block;
+        margin-top: 18px;
+        margin-bottom: 7px;
+        font-weight: bold;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 13px;
+        font-size: 16px;
+        border: 1px solid #bbb;
+        border-radius: 7px;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 25px;
+        border: none;
+        border-radius: 8px;
+        background: #111;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    .result {
+        margin-top: 25px;
+        padding: 20px;
+        background: #f0f7ff;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .result h2 {
+        margin: 8px 0;
+    }
+
+    .note {
+        text-align: center;
+        color: #777;
+        margin-top: 20px;
+        font-size: 13px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Shrinkage Calculator</h1>
+
+    <div class="subtitle">
+        Calculate shrinkage and final dimensions
+    </div>
+
+
+    <label>Original Size (mm):</label>
+
+    <input
+        type="number"
+        id="originalSize"
+        placeholder="Example: 225.62"
+        step="0.01"
+    >
+
+
+    <label>Shrinkage (%):</label>
+
+    <input
+        type="number"
+        id="shrinkage"
+        placeholder="Example: 1"
+        value="1"
+        step="0.01"
+    >
+
+
+    <button onclick="calculateShrinkage()">
+        Calculate
+    </button>
+
+
+    <div class="result" id="result">
+
+        Enter size and shrinkage percentage.
+
+    </div>
+
+
+    <div class="note">
+        Example: 225.62 mm with 1% shrinkage
+    </div>
+
+</div>
+
+
+<script>
+
+function calculateShrinkage() {
+
+    let originalSize =
+        parseFloat(
+            document.getElementById("originalSize").value
+        );
+
+    let shrinkage =
+        parseFloat(
+            document.getElementById("shrinkage").value
+        );
+
+
+    if (isNaN(originalSize) || originalSize <= 0) {
+
+        alert("Please enter a valid original size.");
+
+        return;
+    }
+
+
+    if (isNaN(shrinkage) || shrinkage < 0) {
+
+        alert("Please enter a valid shrinkage percentage.");
+
+        return;
+    }
+
+
+    // Calculate shrinkage amount
+
+    let shrinkageAmount =
+        originalSize * (shrinkage / 100);
+
+
+    // Calculate final reduced size
+
+    let finalSize =
+        originalSize - shrinkageAmount;
+
+
+    document.getElementById("result").innerHTML =
+
+        "<h2>Final Size = " +
+        finalSize.toFixed(3) +
+        " mm</h2>" +
+
+        "<p>Shrinkage Amount = " +
+        shrinkageAmount.toFixed(3) +
+        " mm</p>" +
+
+        "<p>Original Size = " +
+        originalSize.toFixed(3) +
+        " mm</p>";
+}
+
+</script>
+
+</body>
+</html>

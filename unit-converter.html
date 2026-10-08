@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit Converter</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px 15px;
+        font-family: Arial, sans-serif;
+        background: #f2f4f7;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    label {
+        display: block;
+        margin-top: 18px;
+        margin-bottom: 7px;
+        font-weight: bold;
+    }
+
+    select,
+    input {
+        width: 100%;
+        padding: 13px;
+        font-size: 16px;
+        border: 1px solid #bbb;
+        border-radius: 7px;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 25px;
+        border: none;
+        border-radius: 8px;
+        background: #111;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    .result {
+        margin-top: 25px;
+        padding: 20px;
+        background: #f0f7ff;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 21px;
+        font-weight: bold;
+        word-break: break-word;
+    }
+
+    .note {
+        text-align: center;
+        color: #777;
+        margin-top: 20px;
+        font-size: 13px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Unit Converter</h1>
+
+    <div class="subtitle">
+        Convert common engineering units
+    </div>
+
+
+    <label>Conversion:</label>
+
+    <select id="conversion" onchange="updateUnits()">
+
+        <option value="length">
+            Length
+        </option>
+
+        <option value="weight">
+            Weight
+        </option>
+
+        <option value="temperature">
+            Temperature
+        </option>
+
+    </select>
+
+
+    <label>From:</label>
+
+    <select id="fromUnit"></select>
+
+
+    <label>To:</label>
+
+    <select id="toUnit"></select>
+
+
+    <label>Value:</label>
+
+    <input
+        type="number"
+        id="value"
+        placeholder="Example: 25.4"
+        step="any"
+    >
+
+
+    <button onclick="convert()">
+        Convert
+    </button>
+
+
+    <div class="result" id="result">
+        Enter a value and press Convert.
+    </div>
+
+
+    <div class="note">
+        Useful for mechanical and workshop calculations.
+    </div>
+
+</div>
+
+
+<script>
+
+const units = {
+
+    length: [
+        {
+            name: "Millimeter (mm)",
+            value: "mm"
+        },
+        {
+            name: "Centimeter (cm)",
+            value: "cm"
+        },
+        {
+            name: "Meter (m)",
+            value: "m"
+        },
+        {
+            name: "Inch (in)",
+            value: "in"
+        },
+        {
+            name: "Feet (ft)",
+            value: "ft"
+        }
+    ],
+
+    weight: [
+        {
+            name: "Gram (g)",
+            value: "g"
+        },
+        {
+            name: "Kilogram (kg)",
+            value: "kg"
+        },
+        {
+            name: "Pound (lb)",
+            value: "lb"
+        },
+        {
+            name: "Ton (t)",
+            value: "ton"
+        }
+    ],
+
+    temperature: [
+        {
+            name: "Celsius (°C)",
+            value: "C"
+        },
+        {
+            name: "Fahrenheit (°F)",
+            value: "F"
+        },
+        {
+            name: "Kelvin (K)",
+            value: "K"
+        }
+    ]
+
+};
+
+
+function updateUnits() {
+
+    const type =
+        document.getElementById("conversion").value;
+
+    const from =
+        document.getElementById("fromUnit");
+
+    const to =
+        document.getElementById("toUnit");
+
+
+    from.innerHTML = "";
+    to.innerHTML = "";
+
+
+    units[type].forEach(function(unit) {
+
+        let option1 =
+            document.createElement("option");
+
+        option1.value = unit.value;
+
+        option1.textContent = unit.name;
+
+        from.appendChild(option1);
+
+
+        let option2 =
+            document.createElement("option");
+
+        option2.value = unit.value;
+
+        option2.textContent = unit.name;
+
+        to.appendChild(option2);
+
+    });
+
+
+    // Default conversion
+    if (type === "length") {
+
+        from.value = "mm";
+        to.value = "in";
+
+    }
+
+    else if (type === "weight") {
+
+        from.value = "kg";
+        to.value = "g";
+
+    }
+
+    else if (type === "temperature") {
+
+        from.value = "C";
+        to.value = "F";
+
+    }
+}
+
+
+function convert() {
+
+    const type =
+        document.getElementById("conversion").value;
+
+    const from =
+        document.getElementById("fromUnit").value;
+
+    const to =
+        document.getElementById("toUnit").value;
+
+    const value =
+        parseFloat(
+            document.getElementById("value").value
+        );
+
+
+    if (isNaN(value)) {
+
+        alert("Please enter a value.");
+
+        return;
+    }
+
+
+    let result;
+
+
+    // ==========================
+    // LENGTH
+    // ==========================
+
+    if (type === "length") {
+
+        const factors = {
+
+            mm: 1,
+
+            cm: 10,
+
+            m: 1000,
+
+            in: 25.4,
+
+            ft: 304.8
+
+        };
+
+
+        const millimeters =
+            value * factors[from];
+
+
+        result =
+            millimeters / factors[to];
+
+    }
+
+
+    // ==========================
+    // WEIGHT
+    // ==========================
+
+    else if (type === "weight") {
+
+        const factors = {
+
+            g: 1,
+
+            kg: 1000,
+
+            lb: 453.59237,
+
+            ton: 1000000
+
+        };
+
+
+        const grams =
+            value * factors[from];
+
+
+        result =
+            grams / factors[to];
+
+    }
+
+
+    // ==========================
+    // TEMPERATURE
+    // ==========================
+
+    else if (type === "temperature") {
+
+        let celsius;
+
+
+        // Convert FROM to Celsius
+
+        if (from === "C") {
+
+            celsius = value;
+
+        }
+
+        else if (from === "F") {
+
+            celsius =
+                (value - 32) * 5 / 9;
+
+        }
+
+        else if (from === "K") {
+
+            celsius =
+                value - 273.15;
+
+        }
+
+
+        // Convert Celsius TO
+
+        if (to === "C") {
+
+            result = celsius;
+
+        }
+
+        else if (to === "F") {
+
+            result =
+                (celsius * 9 / 5) + 32;
+
+        }
+
+        else if (to === "K") {
+
+            result =
+                celsius + 273.15;
+
+        }
+
+    }
+
+
+    document.getElementById("result").innerHTML =
+
+        value +
+        " " +
+        from +
+        " = <strong>" +
+        result.toFixed(4) +
+        " " +
+        to +
+        "</strong>";
+
+}
+
+
+// Load units when page opens
+updateUnits();
+
+</script>
+
+</body>
+</html>

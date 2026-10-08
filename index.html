@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mechanical Tools | Engineering Calculators</title>
+<meta name="description" content="Free mechanical engineering calculators for material weight, shrinkage, unit conversion, forging and workshop calculations.">
+
+<meta name="keywords" content="mechanical calculator, material weight calculator, steel weight calculator, shrinkage calculator, forging calculator, engineering tools">
+
+<meta name="robots" content="index, follow">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    color: #1f2937;
+}
+
+/* HEADER */
+
+header {
+    background: #111827;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    max-width: 1100px;
+    margin: auto;
+    padding: 16px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 15px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+
+/* HERO */
+
+.hero {
+    background: #1f2937;
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.hero p {
+    margin: 15px auto 0;
+    max-width: 650px;
+    color: #d1d5db;
+    line-height: 1.6;
+}
+
+
+/* MAIN */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 55px 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.section-title p {
+    color: #6b7280;
+}
+
+
+/* TOOLS */
+
+.tools {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.tool {
+    background: white;
+    padding: 25px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.08);
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 300px;
+}
+
+.icon {
+    font-size: 42px;
+}
+
+.tool h3 {
+    margin: 15px 0 10px;
+    font-size: 21px;
+}
+
+.tool p {
+    color: #6b7280;
+    line-height: 1.6;
+
+    margin: 0;
+
+    flex-grow: 1;
+}
+
+
+/* BUTTON */
+
+.button {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 12px;
+
+    background: #111827;
+
+    color: white;
+
+    text-decoration: none;
+
+    text-align: center;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+.button:hover {
+    background: #374151;
+}
+
+
+/* ABOUT */
+
+.about {
+    background: white;
+    border-radius: 14px;
+    padding: 35px;
+    margin-top: 50px;
+    line-height: 1.7;
+}
+
+.about h2 {
+    margin-top: 0;
+}
+
+
+/* CONTACT */
+
+.contact {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.contact p {
+    color: #6b7280;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #111827;
+    color: #d1d5db;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 30px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .tools {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .navbar a {
+        margin: 0 7px;
+    }
+
+    .tools {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 50px 20px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .container {
+        padding: 40px 15px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="navbar">
+
+        <div class="logo">
+            ⚙️ Mechanical Tools
+        </div>
+
+        <nav>
+
+            <a href="#home">Home</a>
+
+            <a href="#tools">Tools</a>
+
+            <a href="#about">About</a>
+
+            <a href="#contact">Contact</a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <h1>Mechanical Tools</h1>
+
+    <p>
+        Free engineering and workshop calculators
+        for mechanical engineers, draftsmen,
+        machinists and manufacturing professionals.
+    </p>
+
+</section>
+
+
+
+<!-- TOOLS -->
+
+<div class="container" id="tools">
+
+    <div class="section-title">
+
+        <h2>Engineering Tools</h2>
+
+        <p>
+            Select a tool below to start your calculation.
+        </p>
+
+    </div>
+
+
+    <div class="tools">
+
+
+        <!-- 1 -->
+
+        <div class="tool">
+
+            <div class="icon">⚖️</div>
+
+            <h3>Material Weight Calculator</h3>
+
+            <p>
+                Calculate the weight of plates,
+                round bars, square bars, pipes
+                and rings.
+            </p>
+
+            <a href="weight.html" class="button">
+                Open Calculator
+            </a>
+
+        </div>
+
+
+
+        <!-- 2 -->
+
+        <div class="tool">
+
+            <div class="icon">📐</div>
+
+            <h3>Shrinkage Calculator</h3>
+
+            <p>
+                Calculate material shrinkage
+                and final dimensions for
+                manufacturing work.
+            </p>
+
+            <a href="shrinkage.html" class="button">
+                Open Calculator
+            </a>
+
+        </div>
+
+
+
+        <!-- 3 -->
+
+        <div class="tool">
+
+            <div class="icon">📏</div>
+
+            <h3>Unit Converter</h3>
+
+            <p>
+                Convert mm, cm, meter, inch,
+                feet, weight and temperature units.
+            </p>
+
+            <a href="unit-converter.html" class="button">
+                Open Converter
+            </a>
+
+        </div>
+
+
+
+        <!-- 4 -->
+
+        <div class="tool">
+
+            <div class="icon">🔩</div>
+
+            <h3>Material Information</h3>
+
+            <p>
+                View basic density, applications
+                and engineering information
+                for common materials.
+            </p>
+
+            <a href="material-info.html" class="button">
+                Open Information
+            </a>
+
+        </div>
+
+
+
+        <!-- 5 -->
+
+        <div class="tool">
+
+            <div class="icon">🏭</div>
+
+            <h3>Forging Tools</h3>
+
+            <p>
+                Calculate billet volume and
+                weight for common forging
+                shapes.
+            </p>
+
+            <a href="forging-tools.html" class="button">
+                Open Forging Tool
+            </a>
+
+        </div>
+
+
+
+        <!-- 6 -->
+
+        <div class="tool">
+
+            <div class="icon">⚙️</div>
+
+            <h3>More Engineering Tools</h3>
+
+            <p>
+                More useful mechanical and
+                manufacturing calculators
+                will be added soon.
+            </p>
+
+            <a href="#contact" class="button">
+                Coming Soon
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ABOUT -->
+
+    <div class="about" id="about">
+
+        <h2>About Mechanical Tools</h2>
+
+        <p>
+            Mechanical Tools is being developed as a
+            collection of simple and useful calculators
+            for engineering, workshop and manufacturing
+            applications.
+        </p>
+
+        <p>
+            The goal is to make everyday engineering
+            calculations faster and easier, especially
+            for mechanical work, fabrication, machining
+            and forging applications.
+        </p>
+
+    </div>
+
+
+
+    <!-- CONTACT -->
+
+   <div class="contact" id="contact">
+
+    <h2>Contact Us</h2>
+
+    <p>
+        For questions, suggestions or feedback,
+        contact us by email.
+    </p>
+
+    <p>
+        📧 <strong>Email:</strong>
+        <a href="mailto:mechanicaltools.pk@gmail.com">    
+            mechanicaltools.pk@gmail.com
+        </a>
+    </p>
+
+</div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>Mechanical Tools © 2026</p>
+
+    <p>
+        <a href="privacy-policy.html"
+           style="color:white; text-decoration:none;">
+            Privacy Policy
+        </a>
+        <a href="terms.html"
+   style="color:white; text-decoration:none;">
+    Terms & Conditions
+        </a>
+    </p>
+
+</footer
+
+</body>
+</html>

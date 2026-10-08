@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Material Weight Calculator</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px 15px;
+        font-family: Arial, sans-serif;
+        background: #f2f4f7;
+        color: #222;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+        font-size: 30px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-top: 18px;
+        margin-bottom: 7px;
+    }
+
+    select,
+    input {
+        width: 100%;
+        padding: 13px;
+        font-size: 16px;
+        border: 1px solid #bbb;
+        border-radius: 7px;
+        outline: none;
+    }
+
+    select:focus,
+    input:focus {
+        border-color: #333;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 25px;
+        border: none;
+        border-radius: 8px;
+        background: #111;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    .result {
+        margin-top: 25px;
+        padding: 20px;
+        background: #f0f7ff;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 19px;
+        font-weight: bold;
+    }
+
+    .note {
+        text-align: center;
+        margin-top: 20px;
+        color: #777;
+        font-size: 13px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Material Weight Calculator</h1>
+
+    <div class="subtitle">
+        Calculate weight of different metal shapes
+    </div>
+
+    <label>Material:</label>
+
+    <select id="material">
+        <option value="7.85">Mild Steel</option>
+        <option value="7.85">Carbon Steel</option>
+        <option value="7.85">C35 / S35C</option>
+        <option value="7.85">EN8 / 1045</option>
+        <option value="7.85">H13 Tool Steel</option>
+        <option value="7.85">Stainless Steel 304</option>
+        <option value="2.70">Aluminium</option>
+        <option value="7.14">Zinc</option>
+        <option value="8.96">Copper</option>
+        <option value="8.50">Brass</option>
+    </select>
+
+
+    <label>Shape:</label>
+
+    <select id="shape" onchange="changeFields()">
+        <option value="plate">Plate</option>
+        <option value="round">Round Bar</option>
+        <option value="square">Square Bar</option>
+        <option value="pipe">Pipe</option>
+        <option value="ring">Ring</option>
+    </select>
+
+
+    <div id="fields"></div>
+
+
+    <label>Quantity (Pieces):</label>
+
+    <input
+        type="number"
+        id="quantity"
+        value="1"
+        min="1"
+        step="1"
+    >
+
+
+    <button onclick="calculateWeight()">
+        Calculate Weight
+    </button>
+
+
+    <div class="result" id="result">
+        Enter dimensions and calculate weight.
+    </div>
+
+
+    <div class="note">
+        All dimensions are in millimeters (mm).
+    </div>
+
+</div>
+
+
+<script>
+
+function changeFields() {
+
+    let shape = document.getElementById("shape").value;
+    let fields = document.getElementById("fields");
+
+    if (shape === "plate") {
+
+        fields.innerHTML = `
+            <label>Length (mm):</label>
+            <input type="number" id="length" placeholder="Example: 325">
+
+            <label>Width (mm):</label>
+            <input type="number" id="width" placeholder="Example: 275">
+
+            <label>Thickness (mm):</label>
+            <input type="number" id="thickness" placeholder="Example: 25.4">
+        `;
+
+    }
+
+    else if (shape === "round") {
+
+        fields.innerHTML = `
+            <label>Diameter (mm):</label>
+            <input type="number" id="diameter" placeholder="Example: 50">
+
+            <label>Length (mm):</label>
+            <input type="number" id="length" placeholder="Example: 1000">
+        `;
+
+    }
+
+    else if (shape === "square") {
+
+        fields.innerHTML = `
+            <label>Side (mm):</label>
+            <input type="number" id="side" placeholder="Example: 50">
+
+            <label>Length (mm):</label>
+            <input type="number" id="length" placeholder="Example: 1000">
+        `;
+
+    }
+
+    else if (shape === "pipe") {
+
+        fields.innerHTML = `
+            <label>Outer Diameter (mm):</label>
+            <input type="number" id="outerDiameter" placeholder="Example: 50">
+
+            <label>Wall Thickness (mm):</label>
+            <input type="number" id="thickness" placeholder="Example: 5">
+
+            <label>Length (mm):</label>
+            <input type="number" id="length" placeholder="Example: 1000">
+        `;
+
+    }
+
+    else if (shape === "ring") {
+
+        fields.innerHTML = `
+            <label>Outer Diameter (mm):</label>
+            <input type="number" id="outerDiameter" placeholder="Example: 100">
+
+            <label>Inner Diameter (mm):</label>
+            <input type="number" id="innerDiameter" placeholder="Example: 50">
+
+            <label>Thickness (mm):</label>
+            <input type="number" id="thickness" placeholder="Example: 20">
+        `;
+    }
+}
+
+
+function calculateWeight() {
+
+    let density = parseFloat(
+        document.getElementById("material").value
+    );
+
+    let shape = document.getElementById("shape").value;
+
+    let quantity = parseFloat(
+        document.getElementById("quantity").value
+    );
+
+    if (!quantity || quantity <= 0) {
+        quantity = 1;
+    }
+
+    let volume = 0;
+
+
+    // PLATE
+    if (shape === "plate") {
+
+        let length = parseFloat(
+            document.getElementById("length").value
+        );
+
+        let width = parseFloat(
+            document.getElementById("width").value
+        );
+
+        let thickness = parseFloat(
+            document.getElementById("thickness").value
+        );
+
+        if (!length || !width || !thickness) {
+            alert("Please enter Length, Width and Thickness.");
+            return;
+        }
+
+        volume = length * width * thickness;
+    }
+
+
+    // ROUND BAR
+    else if (shape === "round") {
+
+        let diameter = parseFloat(
+            document.getElementById("diameter").value
+        );
+
+        let length = parseFloat(
+            document.getElementById("length").value
+        );
+
+        if (!diameter || !length) {
+            alert("Please enter Diameter and Length.");
+            return;
+        }
+
+        let radius = diameter / 2;
+
+        volume = Math.PI * radius * radius * length;
+    }
+
+
+    // SQUARE BAR
+    else if (shape === "square") {
+
+        let side = parseFloat(
+            document.getElementById("side").value
+        );
+
+        let length = parseFloat(
+            document.getElementById("length").value
+        );
+
+        if (!side || !length) {
+            alert("Please enter Side and Length.");
+            return;
+        }
+
+        volume = side * side * length;
+    }
+
+
+    // PIPE
+    else if (shape === "pipe") {
+
+        let outerDiameter = parseFloat(
+            document.getElementById("outerDiameter").value
+        );
+
+        let thickness = parseFloat(
+            document.getElementById("thickness").value
+        );
+
+        let length = parseFloat(
+            document.getElementById("length").value
+        );
+
+        if (!outerDiameter || !thickness || !length) {
+            alert("Please enter all Pipe dimensions.");
+            return;
+        }
+
+        let outerRadius = outerDiameter / 2;
+
+        let innerRadius = outerRadius - thickness;
+
+        if (innerRadius <= 0) {
+            alert("Wall thickness is too large.");
+            return;
+        }
+
+        volume =
+            Math.PI *
+            (outerRadius * outerRadius -
+            innerRadius * innerRadius) *
+            length;
+    }
+
+
+    // RING
+    else if (shape === "ring") {
+
+        let outerDiameter = parseFloat(
+            document.getElementById("outerDiameter").value
+        );
+
+        let innerDiameter = parseFloat(
+            document.getElementById("innerDiameter").value
+        );
+
+        let thickness = parseFloat(
+            document.getElementById("thickness").value
+        );
+
+        if (!outerDiameter || !innerDiameter || !thickness) {
+            alert("Please enter all Ring dimensions.");
+            return;
+        }
+
+        if (innerDiameter >= outerDiameter) {
+            alert("Inner Diameter must be smaller than Outer Diameter.");
+            return;
+        }
+
+        let outerRadius = outerDiameter / 2;
+        let innerRadius = innerDiameter / 2;
+
+        volume =
+            Math.PI *
+            (outerRadius * outerRadius -
+            innerRadius * innerRadius) *
+            thickness;
+    }
+
+
+    // Convert mm³ to kg
+    // Density is g/cm³
+    // 1 kg = 1,000,000 mm³ / density conversion
+    let weightPerPiece =
+        (volume * density) / 1000000;
+
+    let totalWeight =
+        weightPerPiece * quantity;
+
+
+    document.getElementById("result").innerHTML =
+
+        quantity +
+        " Piece Weight = " +
+        weightPerPiece.toFixed(3) +
+        " kg<br><br>" +
+
+        "Total Weight = " +
+        totalWeight.toFixed(3) +
+        " kg";
+}
+
+
+// Load Plate fields automatically
+changeFields();
+
+</script>
+
+</body>
+</html>

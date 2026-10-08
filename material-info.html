@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Material Information</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px 15px;
+    font-family: Arial, sans-serif;
+    background: #f2f4f7;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 13px;
+    font-size: 16px;
+    border: 1px solid #bbb;
+    border-radius: 7px;
+}
+
+.info {
+    margin-top: 25px;
+    padding: 22px;
+    background: #f0f7ff;
+    border-radius: 10px;
+}
+
+.info h2 {
+    margin-top: 0;
+}
+
+.info p {
+    line-height: 1.6;
+}
+
+.back {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    padding: 12px;
+    background: #111;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Material Information</h1>
+
+    <div class="subtitle">
+        Basic engineering material reference
+    </div>
+
+    <label>Select Material:</label>
+
+    <select id="material" onchange="showMaterial()">
+
+        <option value="ms">Mild Steel</option>
+
+        <option value="c35">C35 / 1045</option>
+
+        <option value="h13">H13 Tool Steel</option>
+
+        <option value="ss304">Stainless Steel 304</option>
+
+        <option value="aluminium">Aluminium</option>
+
+        <option value="copper">Copper</option>
+
+        <option value="brass">Brass</option>
+
+        <option value="castiron">Cast Iron</option>
+
+    </select>
+
+
+    <div class="info" id="info"></div>
+
+
+    <a href="index.html" class="back">
+        ← Back to Home
+    </a>
+
+</div>
+
+
+<script>
+
+const materials = {
+
+    ms: {
+        name: "Mild Steel",
+        density: "7.85 g/cm³",
+        use: "General fabrication, plates, structures and machine components.",
+        note: "Common engineering steel. Easy to machine and weld."
+    },
+
+    c35: {
+        name: "C35 / 1045",
+        density: "7.85 g/cm³",
+        use: "Shafts, gears, pins, machine parts and forging applications.",
+        note: "Medium-carbon steel with good strength and machinability."
+    },
+
+    h13: {
+        name: "H13 Tool Steel",
+        density: "Approximately 7.8 g/cm³",
+        use: "Forging dies, hot-work dies, extrusion dies and tooling.",
+        note: "Hot-work tool steel with good thermal fatigue resistance."
+    },
+
+    ss304: {
+        name: "Stainless Steel 304",
+        density: "Approximately 7.9 g/cm³",
+        use: "Food equipment, general fabrication, tanks and corrosion-resistant parts.",
+        note: "Good general corrosion resistance."
+    },
+
+    aluminium: {
+        name: "Aluminium",
+        density: "2.70 g/cm³",
+        use: "Lightweight structures, housings, automotive and general fabrication.",
+        note: "Low density and good corrosion resistance."
+    },
+
+    copper: {
+        name: "Copper",
+        density: "8.96 g/cm³",
+        use: "Electrical components, wiring, heat exchangers and fittings.",
+        note: "Excellent electrical and thermal conductivity."
+    },
+
+    brass: {
+        name: "Brass",
+        density: "Approximately 8.5 g/cm³",
+        use: "Bushes, fittings, valves, decorative and machine components.",
+        note: "Good machinability and corrosion resistance."
+    },
+
+    castiron: {
+        name: "Cast Iron",
+        density: "Approximately 7.1 g/cm³",
+        use: "Machine bases, housings, pulleys and heavy machine components.",
+        note: "Good compressive strength and vibration damping."
+    }
+
+};
+
+
+function showMaterial() {
+
+    const selected =
+        document.getElementById("material").value;
+
+    const data =
+        materials[selected];
+
+
+    document.getElementById("info").innerHTML =
+
+        "<h2>" +
+        data.name +
+        "</h2>" +
+
+        "<p><strong>Density:</strong> " +
+        data.density +
+        "</p>" +
+
+        "<p><strong>Common Uses:</strong> " +
+        data.use +
+        "</p>" +
+
+        "<p><strong>Engineering Note:</strong> " +
+        data.note +
+        "</p>";
+}
+
+
+// Show first material automatically
+showMaterial();
+
+</script>
+
+</body>
+</html>
