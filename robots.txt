@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mechanicaltoolspk.github.io/mechanical-tools/sitemap.xml
